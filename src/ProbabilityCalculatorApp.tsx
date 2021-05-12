@@ -8,10 +8,9 @@ import {
 import { useState } from "react";
 import {
   calculations,
-  combinedProbability,
   FunctionTypes,
 } from "./calculator/probabilityCalculations";
-import { Control, Controller, useForm } from "react-hook-form";
+import { Control, Controller, FieldError, useForm } from "react-hook-form";
 
 interface ICalculatorFormInput {
   probabilityA: string;
@@ -26,7 +25,6 @@ const ProbabilityCalculatorApp = () => {
   const {
     handleSubmit,
     control,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     formState: { errors },
   } = useForm<ICalculatorFormInput>();
 
@@ -52,11 +50,13 @@ const ProbabilityCalculatorApp = () => {
           control={control}
           label="Probability A"
           field="probabilityA"
+          error={errors.probabilityA}
         />
         <ProbabilityInput
           control={control}
           label="Probability B"
           field="probabilityB"
+          error={errors.probabilityB}
         />
         <Controller
           name="functionType"
@@ -64,14 +64,27 @@ const ProbabilityCalculatorApp = () => {
           rules={{ required: true }}
           defaultValue=""
           render={({ field }) => (
-            <TextField {...field} id="functionType" label="Function" select>
+            <TextField
+              {...field}
+              id="functionType"
+              label="Function"
+              select
+              error={Boolean(errors.functionType)}
+              helperText={
+                errors.functionType &&
+                errors.functionType.type === "required" &&
+                "Please enter a value for Function"
+              }
+            >
               <MenuItem value="combined">CombinedWith</MenuItem>
               <MenuItem value="either">Either</MenuItem>
             </TextField>
           )}
         />
 
-        <Button type="submit">Calculate</Button>
+        <Button type="submit" variant="outlined" color="primary">
+          Calculate
+        </Button>
       </form>
 
       <Typography>Result: {calculationResult}</Typography>
@@ -83,9 +96,15 @@ interface ProbabilityInputProps {
   control: Control<ICalculatorFormInput>;
   label: string;
   field: keyof ICalculatorFormInput;
+  error?: FieldError;
 }
 
-const ProbabilityInput = ({ control, label, field }: ProbabilityInputProps) => {
+const ProbabilityInput = ({
+  control,
+  label,
+  field,
+  error,
+}: ProbabilityInputProps) => {
   return (
     <Controller
       name={field}
@@ -99,6 +118,12 @@ const ProbabilityInput = ({ control, label, field }: ProbabilityInputProps) => {
           id={label}
           type="number"
           inputProps={{ step: "any" }}
+          error={Boolean(error)}
+          helperText={
+            error &&
+            error.type === "required" &&
+            `Please enter a value for ${label}`
+          }
         />
       )}
     />

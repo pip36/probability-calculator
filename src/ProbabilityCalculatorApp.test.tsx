@@ -61,3 +61,22 @@ test("Can calculate an 'either' probability and display the result", async () =>
     await screen.findByText(`Result: ${eitherProbability(inputA, inputB)}`)
   ).toBeInTheDocument();
 });
+
+test("Displays validation errors when required fields are missing", async () => {
+  render(<ProbabilityCalculatorApp />);
+
+  const calculateButton = screen.getByRole("button", { name: /Calculate/i });
+  userEvent.click(calculateButton);
+
+  expect(
+    await screen.findByText("Please enter a value for Probability A")
+  ).toBeInTheDocument();
+
+  expect(
+    await screen.findByText("Please enter a value for Probability B")
+  ).toBeInTheDocument();
+
+  expect(
+    await screen.findByText("Please enter a value for Function")
+  ).toBeInTheDocument();
+});
