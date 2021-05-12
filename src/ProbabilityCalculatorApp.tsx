@@ -4,6 +4,7 @@ import {
   TextField,
   Button,
   MenuItem,
+  Grid,
 } from "@material-ui/core";
 import { useState } from "react";
 import {
@@ -43,52 +44,70 @@ const ProbabilityCalculatorApp = () => {
 
   return (
     <Container maxWidth="sm">
-      <Typography align="center" variant="h1">
+      <Typography align="center" variant="h3" gutterBottom component="h1">
         Probability Calculator
       </Typography>
+
       <form onSubmit={handleSubmit(onSubmit)}>
-        <ProbabilityInput
-          control={control}
-          label="Probability A"
-          field="probabilityA"
-          error={errors.probabilityA}
-        />
-        <ProbabilityInput
-          control={control}
-          label="Probability B"
-          field="probabilityB"
-          error={errors.probabilityB}
-        />
-        <Controller
-          name="functionType"
-          control={control}
-          rules={{ required: true }}
-          defaultValue=""
-          render={({ field }) => (
-            <TextField
-              {...field}
-              id="functionType"
-              label="Function"
-              select
-              error={Boolean(errors.functionType)}
-              helperText={
-                errors.functionType &&
-                errors.functionType.type === "required" &&
-                "Please enter a value for Function"
-              }
-            >
-              <MenuItem value="combined">CombinedWith</MenuItem>
-              <MenuItem value="either">Either</MenuItem>
-            </TextField>
-          )}
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <ProbabilityInput
+              control={control}
+              label="Probability A"
+              field="probabilityA"
+              error={errors.probabilityA}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <ProbabilityInput
+              control={control}
+              label="Probability B"
+              field="probabilityB"
+              error={errors.probabilityB}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Controller
+              name="functionType"
+              control={control}
+              rules={{ required: true }}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="functionType"
+                  label="Function"
+                  select
+                  fullWidth
+                  error={Boolean(errors.functionType)}
+                  helperText={
+                    errors.functionType &&
+                    errors.functionType.type === "required" &&
+                    "Please enter a value for Function"
+                  }
+                >
+                  <MenuItem value="combined">CombinedWith</MenuItem>
+                  <MenuItem value="either">Either</MenuItem>
+                </TextField>
+              )}
+            />
+          </Grid>
 
-        <Button type="submit" variant="outlined" color="primary">
-          Calculate
-        </Button>
+          <Grid item xs={3}>
+            <Button type="submit" variant="outlined" color="primary">
+              Calculate
+            </Button>
+          </Grid>
+
+          <Grid item xs={9}>
+            {calculationResult && (
+              <Typography variant="h4" style={{ textAlign: "right" }}>
+                Result: {calculationResult}
+              </Typography>
+            )}
+          </Grid>
+        </Grid>
       </form>
-
-      <Typography>Result: {calculationResult}</Typography>
     </Container>
   );
 };
@@ -124,7 +143,8 @@ const ProbabilityInput = ({
           label={label}
           id={label}
           type="number"
-          inputProps={{ step: "any" }}
+          fullWidth
+          inputProps={{ step: "step" }}
           error={Boolean(error)}
           helperText={error && errorText[error.type]}
         />
