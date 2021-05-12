@@ -25,7 +25,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "start-api": "dotnet run --project logger_api/logger_api.csproj"
   },
   "eslintConfig": {
     "extends": [
