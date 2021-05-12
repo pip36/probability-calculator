@@ -105,6 +105,12 @@ const ProbabilityInput = ({
   field,
   error,
 }: ProbabilityInputProps) => {
+  const errorText: Partial<{ [key: string]: string }> = {
+    required: `Please enter a value for ${label}`,
+    max: `${label} is too large, enter a number from 0.0 to 1.0`,
+    min: `${label} is too small, enter a number from 0.0 to 1.0`,
+  };
+
   return (
     <Controller
       name={field}
@@ -119,11 +125,7 @@ const ProbabilityInput = ({
           type="number"
           inputProps={{ step: "any" }}
           error={Boolean(error)}
-          helperText={
-            error &&
-            error.type === "required" &&
-            `Please enter a value for ${label}`
-          }
+          helperText={error && errorText[error.type]}
         />
       )}
     />

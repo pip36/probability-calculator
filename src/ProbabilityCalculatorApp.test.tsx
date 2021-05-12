@@ -80,3 +80,39 @@ test("Displays validation errors when required fields are missing", async () => 
     await screen.findByText("Please enter a value for Function")
   ).toBeInTheDocument();
 });
+
+test("Displays validation errors when values are too large", async () => {
+  render(<ProbabilityCalculatorApp />);
+
+  performCalculation(1.0000001, 1.000001, "either");
+
+  expect(
+    await screen.findByText(
+      "Probability A is too large, enter a number from 0.0 to 1.0"
+    )
+  ).toBeInTheDocument();
+
+  expect(
+    await screen.findByText(
+      "Probability B is too large, enter a number from 0.0 to 1.0"
+    )
+  ).toBeInTheDocument();
+});
+
+test("Displays validation errors when values are too small", async () => {
+  render(<ProbabilityCalculatorApp />);
+
+  performCalculation(-0.00001, -0.000001, "either");
+
+  expect(
+    await screen.findByText(
+      "Probability A is too small, enter a number from 0.0 to 1.0"
+    )
+  ).toBeInTheDocument();
+
+  expect(
+    await screen.findByText(
+      "Probability B is too small, enter a number from 0.0 to 1.0"
+    )
+  ).toBeInTheDocument();
+});
