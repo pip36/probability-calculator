@@ -6,13 +6,17 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useState } from "react";
-import { combinedProbability } from "./calculator/probabilityCalculations";
-import { Controller, useForm } from "react-hook-form";
+import {
+  calculations,
+  combinedProbability,
+  FunctionTypes,
+} from "./calculator/probabilityCalculations";
+import { Control, Controller, useForm } from "react-hook-form";
 
 interface ICalculatorFormInput {
   probabilityA: string;
   probabilityB: string;
-  functionType: string;
+  functionType: FunctionTypes;
 }
 
 const ProbabilityCalculatorApp = () => {
@@ -31,9 +35,11 @@ const ProbabilityCalculatorApp = () => {
     probabilityB,
     functionType,
   }: ICalculatorFormInput) => {
-    setCalculationResult(
-      combinedProbability(parseFloat(probabilityA), parseFloat(probabilityB))
+    const result = calculations[functionType](
+      parseFloat(probabilityA),
+      parseFloat(probabilityB)
     );
+    setCalculationResult(result);
   };
 
   return (
@@ -42,39 +48,25 @@ const ProbabilityCalculatorApp = () => {
         Probability Calculator
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="probabilityA"
+        <ProbabilityInput
           control={control}
-          rules={{ min: 0, max: 1, required: true }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Probability A"
-              id="probabilityA"
-              type="number"
-            />
-          )}
+          label="Probability A"
+          field="probabilityA"
         />
-        <Controller
-          name="probabilityB"
+        <ProbabilityInput
           control={control}
-          rules={{ min: 0, max: 1, required: true }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Probability B"
-              id="probabilityB"
-              type="number"
-            />
-          )}
+          label="Probability B"
+          field="probabilityB"
         />
         <Controller
           name="functionType"
           control={control}
           rules={{ required: true }}
+          defaultValue=""
           render={({ field }) => (
             <TextField {...field} id="functionType" label="Function" select>
-              <MenuItem value="combinedWith">CombinedWith</MenuItem>
+              <MenuItem value="combined">CombinedWith</MenuItem>
+              <MenuItem value="either">Either</MenuItem>
             </TextField>
           )}
         />
@@ -84,6 +76,32 @@ const ProbabilityCalculatorApp = () => {
 
       <Typography>Result: {calculationResult}</Typography>
     </Container>
+  );
+};
+
+interface ProbabilityInputProps {
+  control: Control<ICalculatorFormInput>;
+  label: string;
+  field: keyof ICalculatorFormInput;
+}
+
+const ProbabilityInput = ({ control, label, field }: ProbabilityInputProps) => {
+  return (
+    <Controller
+      name={field}
+      control={control}
+      rules={{ min: 0, max: 1, required: true }}
+      defaultValue=""
+      render={({ field }) => (
+        <TextField
+          {...field}
+          label={label}
+          id={label}
+          type="number"
+          inputProps={{ step: "any" }}
+        />
+      )}
+    />
   );
 };
 
