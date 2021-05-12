@@ -1,5 +1,6 @@
 {
   "name": "probability-calculator",
+  "homepage": "https://pip36.github.io/probability-calculator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
