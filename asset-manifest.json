@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/probability-calculator/static/js/main.83d25849.chunk.js",
+    "main.js.map": "/probability-calculator/static/js/main.83d25849.chunk.js.map",
+    "runtime-main.js": "/probability-calculator/static/js/runtime-main.0256a466.js",
+    "runtime-main.js.map": "/probability-calculator/static/js/runtime-main.0256a466.js.map",
+    "static/js/2.df6317a6.chunk.js": "/probability-calculator/static/js/2.df6317a6.chunk.js",
+    "static/js/2.df6317a6.chunk.js.map": "/probability-calculator/static/js/2.df6317a6.chunk.js.map",
+    "index.html": "/probability-calculator/index.html",
+    "static/js/2.df6317a6.chunk.js.LICENSE.txt": "/probability-calculator/static/js/2.df6317a6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0256a466.js",
+    "static/js/2.df6317a6.chunk.js",
+    "static/js/main.83d25849.chunk.js"
+  ]
+}
