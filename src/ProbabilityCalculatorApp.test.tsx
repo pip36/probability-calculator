@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import {
   combinedProbability,
   eitherProbability,
-  FunctionTypes,
+  CalculationTypes,
 } from "./calculator/probabilityCalculations";
 
 import ProbabilityCalculatorApp from "./ProbabilityCalculatorApp";
@@ -18,8 +18,8 @@ test("Displays main heading", () => {
   expect(heading).toBeInTheDocument();
 });
 
-const performCalculation = (x: number, y: number, type: FunctionTypes) => {
-  const functionText: { [Type in FunctionTypes]: RegExp } = {
+const performCalculation = (x: number, y: number, type: CalculationTypes) => {
+  const functionText: { [Type in CalculationTypes]: RegExp } = {
     combined: /CombinedWith/i,
     either: /Either/i,
   };

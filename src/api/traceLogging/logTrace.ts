@@ -1,8 +1,8 @@
-import { FunctionTypes } from "../../calculator/probabilityCalculations";
+import { CalculationTypes } from "../../calculator/probabilityCalculations";
 import config from "../../config";
 
 interface LogTracePayload {
-  calculationType: FunctionTypes;
+  calculationType: CalculationTypes;
   inputs: number[];
   result: number;
 }

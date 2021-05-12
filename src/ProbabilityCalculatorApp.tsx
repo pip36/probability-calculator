@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import {
   calculations,
-  FunctionTypes,
+  CalculationTypes,
 } from "./calculator/probabilityCalculations";
 import { Control, Controller, FieldError, useForm } from "react-hook-form";
 import { logTrace } from "./api/traceLogging/logTrace";
@@ -16,7 +16,7 @@ import { logTrace } from "./api/traceLogging/logTrace";
 interface ICalculatorFormInput {
   probabilityA: string;
   probabilityB: string;
-  functionType: FunctionTypes;
+  functionType: CalculationTypes;
 }
 
 const ProbabilityCalculatorApp = () => {
