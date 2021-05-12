@@ -11,6 +11,7 @@ import {
   FunctionTypes,
 } from "./calculator/probabilityCalculations";
 import { Control, Controller, FieldError, useForm } from "react-hook-form";
+import { logTrace } from "./api/traceLogging/logTrace";
 
 interface ICalculatorFormInput {
   probabilityA: string;
@@ -33,11 +34,11 @@ const ProbabilityCalculatorApp = () => {
     probabilityB,
     functionType,
   }: ICalculatorFormInput) => {
-    const result = calculations[functionType](
-      parseFloat(probabilityA),
-      parseFloat(probabilityB)
-    );
+    const a = parseFloat(probabilityA);
+    const b = parseFloat(probabilityB);
+    const result = calculations[functionType](a, b);
     setCalculationResult(result);
+    logTrace({ calculationType: functionType, inputs: [a, b], result });
   };
 
   return (

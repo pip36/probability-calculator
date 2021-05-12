@@ -27,6 +27,14 @@ namespace logger_api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "logger_api", Version = "v1" });
             });
 
+            services.AddCors(o => o.AddPolicy("*", builder =>
+            {
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
             services.AddTransient<ILogTraceService, FileLogTracer>();
         }
 
@@ -43,6 +51,8 @@ namespace logger_api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("*");
 
             app.UseAuthorization();
 
