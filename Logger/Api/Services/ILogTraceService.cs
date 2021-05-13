@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace logger_api.Services
+namespace Api.Services
 {
     public interface ILogTraceService
     {

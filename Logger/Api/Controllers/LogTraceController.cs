@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using logger_api.Models;
-using logger_api.Services;
+using Api.Models;
+using Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace logger_api.Controllers
+namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace logger_api.Services
+namespace Api.Services
 {
     public class FileLogTracer : ILogTraceService
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace logger_api.Models
+namespace Api.Models
 {
     public class LogTraceBody
     {
