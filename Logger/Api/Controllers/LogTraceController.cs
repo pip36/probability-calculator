@@ -20,7 +20,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Get([FromBody] LogTraceBody body)
+        public async Task<IActionResult> Log([FromBody] LogTraceBody body)
         {
             await _logTraceService.LogCalculation(body.CalculationType, body.Inputs, body.Result);
 

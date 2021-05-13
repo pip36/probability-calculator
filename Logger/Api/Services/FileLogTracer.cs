@@ -18,7 +18,9 @@ namespace Api.Services
                 Result = result
             });
 
-            await File.AppendAllLinesAsync("./temp/log-out.txt", new List<string> { line });
+            FileInfo file = new FileInfo("./temp/log-out.txt");
+            file.Directory.Create();
+            await File.AppendAllLinesAsync(file.FullName, new List<string> { line });
         }
     }
 }
