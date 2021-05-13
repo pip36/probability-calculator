@@ -12,7 +12,7 @@ import {
   CalculationTypes,
 } from "./calculator/probabilityCalculations";
 import { Control, Controller, FieldError, useForm } from "react-hook-form";
-import { logTrace } from "./api/traceLogging/logTrace";
+import { logTrace } from "./services/traceLogging/logTrace";
 
 interface ICalculatorFormInput {
   probabilityA: string;
