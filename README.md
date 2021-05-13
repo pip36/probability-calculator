@@ -15,7 +15,7 @@ Runs the app in the development mode.
 ### `npm run start-api`
 
 Runs the Api.
-(Not required to use the app, this just writes some log entries to Api/temp/log-out.txt)
+(Not required to use the app, this just writes some log entries to Logger/Api/temp/log-out.txt)
 
 ### `npm t`
 
