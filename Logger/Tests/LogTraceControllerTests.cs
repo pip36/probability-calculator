@@ -1,6 +1,5 @@
 using Api;
 using Microsoft.AspNetCore.Mvc.Testing;
-using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
