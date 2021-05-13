@@ -81,6 +81,14 @@ test("Displays validation errors when required fields are missing", async () => 
   ).toBeInTheDocument();
 });
 
+test("Displays '0' as a result correctly", async () => {
+  render(<ProbabilityCalculatorApp />);
+
+  performCalculation(0, 0, "either");
+
+  expect(await screen.findByText(`Result: 0`)).toBeInTheDocument();
+});
+
 test("Displays validation errors when values are too large", async () => {
   render(<ProbabilityCalculatorApp />);
 

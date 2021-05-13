@@ -100,7 +100,7 @@ const ProbabilityCalculatorApp = () => {
           </Grid>
 
           <Grid item xs={9}>
-            {calculationResult && (
+            {calculationResult !== null && (
               <Typography variant="h4" style={{ textAlign: "right" }}>
                 Result: {calculationResult}
               </Typography>
