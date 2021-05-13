@@ -144,7 +144,20 @@ const ProbabilityInput = ({
           id={label}
           type="number"
           fullWidth
-          inputProps={{ step: "step" }}
+          /* step: 'any' is a tradeoff:
+             It allows the user to enter a large number of decimal places, BUT
+             Browser will default 'number' input arrow icons to incrementing by 1, which isn't very useful
+             for probabilities.
+
+             Instead a max number of dp could be defined, i.e. step: 0.001, but this will cause
+             browser automatic validation to kick in when the user types more dp values than allowed.
+
+             Solutions
+             - Hide arrows with step: 'any'
+             - Accept automatic browser validation and use step: '0.0001'
+             - Use a input type 'text' and apply custom validation
+          */
+          inputProps={{ step: "any" }}
           error={Boolean(error)}
           helperText={error && errorText[error.type]}
         />
