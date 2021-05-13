@@ -40,5 +40,23 @@ namespace Tests
             Assert.Contains("1.0", firstLine);
             Assert.Contains("combined", firstLine);
         }
+
+        [Fact]
+        public async void LogsMultipleLines()
+        {
+            var client = _factory.CreateClient();
+
+            var requestBody = new StringContent(
+                "{ \"calculationType\":\"combined\", \"inputs\":[0.1,0.2], \"result\":1.0}",
+                Encoding.UTF8,
+                "application/json");
+
+            await client.PostAsync("/logTrace", requestBody);
+            await client.PostAsync("/logTrace", requestBody);
+            await client.PostAsync("/logTrace", requestBody);
+
+            var lines = await File.ReadAllLinesAsync("./temp/log-out.txt", Encoding.UTF8);
+            Assert.Equal(3, lines.Count());
+        }
     }
 }

@@ -19,4 +19,8 @@ Runs the Api.
 
 ### `npm t`
 
-Run tests in watch mode
+Run ui tests in watch mode
+
+### `npm run test-api`
+
+Run api tests
